@@ -1,0 +1,9 @@
+1)
+This synchronisation option is not going to cope well with a large number of files.
+The implementation needs to check through all the files at least 3 times, one time each to update the .sync file of each directory, and one time to merge the two directories based on the .sync files.
+Merging the directories based on the sync files is not efficient as if a file has different digests in each .sync file, then the implementation will need to go through the digests for the file until it finds a possible match between the current digest of one file and the earlier digest of the other. If there are lots of files that need to do this, and they have many versions, then this may be slow.
+Also, if there are a lot of subdirectories then the same process has to occur for all subdirectories. In a file system with lots of subdirectories and not so many files in each subdirectory, this implementation is going to end up creating a lot of .sync files which all have to be updated and compared each time.
+Also, if there are a large number of files in a directory, then the contents of the .sync file is going to increase rapidy, since entries for every file are entered into the .sync file every time the sync is run.
+
+2)
+
